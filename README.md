@@ -1,6 +1,7 @@
 # READ ME
 
-Talk *'About Digital Twins, agents, and multiagent systems: a cross-fertilisation journey'* given by [Stefano Mariani](https://smarianimore.github.io) at [EMAS 2022](https://emas.in.tu-clausthal.de/2022/)
+Talk *'Multi-agent learning of causal networks in the
+Internet of Things'* given by [Stefano Mariani](https://smarianimore.github.io) at [PAAMS 2023](https://www.paams.net/)
 
 # Credits
 
