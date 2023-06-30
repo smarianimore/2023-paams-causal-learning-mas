@@ -42,7 +42,7 @@
         <section data-transition="convex" data-background-image="" data-background-opacity=0.25 data-background-size="cover">
           <p><small> PAAMS, 12-14/7/2023 </small></p>
           <hr>
-          <h3> Multi-agent learning of causal networks in the Internet of Things </h3>
+          <h3> Multi-agent learning <br> of causal networks <br> in the Internet of Things </h3>
           <hr>
           <p> <a href="https://smarianimore.github.io">Stefano Mariani</a>, Pasquale Roseti, Franco Zambonelli </p>
           <hr>
@@ -55,22 +55,324 @@
           <section data-markdown>
             <script type="text/template">
               <!-- .slide: data-transition="slide" -->
-              # Motivation
+              ## Motivation
+              ----
 
-              * *Causal models* of the application domain are required for correct inference, prediction, planning, what if, ...
-              * Software agents usually *implicitly embed* such causal model
+              * **Causal models** of app environment are required for correct inference, prediction, planning, what if, ...
+              * Software agents usually **implicitly embed** them...
                 - e.g. IF cause THEN effect (reactive agents)
                 - belief :- intention(s) (BDI)
-              * Hard-coding requires design-time complete knowledge -> unrealistic in many real world scenarios
+              * ...assuming **complete knowledge** at **design-time**
+
+              *What if that's not available?*
             </script>
           </section>
           <section data-markdown>
             <script type="text/template">
               <!-- .slide: data-transition="slide" -->
-              # Goal
+              ## Goal
+              ----
 
-              * Learn causal models at run-time
-              
+              **Learn** causal models at **run-time**!
+
+              * **Causal discovery** tells apart cause-effect from correlation...
+              * ...but mostly assumes full observability of env
+
+              *What if that's not available?*
+
+              Learn with **multiple agents** with **partial obs**!
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              <!-- .slide: data-transition="slide" -->
+              ## Contribution
+              ----
+
+              **Collaborative multi-agent protocol for distributed causal discovery**
+
+              1. formulate multi-agent learning problem
+              2. introduce coordination protocol
+              3. experimental evaluation
+            </script>
+          </section>
+        </section>
+
+        <section data-transition="convex" data-background-image="" data-background-opacity=0.25 data-background-size="cover">
+          <section data-markdown>
+            <script type="text/template">
+              <!-- .slide: data-transition="slide" -->
+              ## Intervention
+              ----
+
+              * ML recognises *correlation*, not causation
+              * Learning through **intervention**
+                + act on a variable *all others being untouched*
+                + observe changes
+                + formalised as do operator do(X=x)
+                  - $\mathcal{P}(T) \neq \mathcal{P}(T | do(AC=on))$
+                  - $\mathcal{P}(AC) = \mathcal{P}(AC | do(T=t))$
+
+              *What if cannot intervene (e.g. sensor variable)?*
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              <!-- .slide: data-transition="slide" -->
+              ### Causal discovery
+              ----
+
+              * Still possible with *identifiability conditions* (i.e. assumptions)
+                + causal network is a DAG
+                + no unknown confounders
+                + (others, no time now)
+              * E.g. $AC \rightarrow T \leftarrow Season$
+                + *conditional independence* tests
+                + e.g. $\chi^2(T | Season)$ and viceversa
+              * Result is a causal network (DAG)
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              <!-- .slide: data-transition="slide" -->
+              ## Problem
+              ----
+
+              <style>
+                .container{
+                  display: flex;
+                }
+                .col{
+                  flex: 1;
+                }
+              </style>
+              <div class="container">
+                <div class="col">
+                  <img data-src="res/agent-env-4_1.png">
+                </div>
+                <div class="col">
+                  <ul><small>
+                    <li> $N$ agents $\mathcal{A} = \{\mathcal{A}_i\}, i = 1, ..., N$ </li>
+                    <li> $V$ variables = $\mathcal{C} \cup U$ (controlled + uncontrolled) </li>
+                    <li> Each $\mathcal{A}_i$ learns <strong>local causal net</strong> $\mathcal{L}_i$ with observable vars $P_i = \{\mathcal{C}_i \cup U_i\} \subset V$ </li>
+                    <li> Each $\mathcal{A}_i$ has <strong>partial obs</strong>: $V = \bigcup_{i=1}^N P_i$ (overlaps may exist) </li>
+                    <li> Agents can communicate </li>
+                    <li> Agents have criteria to trigger collaboration </li>
+                  </small></ul>
+                </div>
+              </div>
+              Each $\mathcal{A}_i$ wants to learn $M_i$ refining $\mathcal{L}_i$ with unknown variables $\neg{P}_i = V \setminus P_i$ and their links with $P_i$
+            </script>
+          </section>
+        </section>
+
+        <section data-transition="convex" data-background-image="" data-background-opacity=0.25 data-background-size="cover">
+          <section data-markdown>
+            <script type="text/template">
+              <!-- .slide: data-transition="slide" -->
+              ### Main protocol
+              ----
+
+              * whenever $\mathcal{A}_i$'s criteria trigger
+                + ask help by sending $\mathcal{A}_{j \neq i}$ its **frontier** variables $F_i$
+                  <small><ul>
+                    <li> e.g. $\mathcal{A}_i$ knows from $\mathcal{L}_i$ that $c \rightarrow e$ but acting on $c$ does not cause $e$ </li>
+                    <li> $e$ might have missing causes, put $e$ in $F_i$ </li>
+                  </ul></small>
+                + collect replies (see below) and refines $\mathcal{L}_i$ in $M_i$
+              * in parallel, reply to help requests
+                + if received $f \in F_{j \neq i}$ also $\in P_i$, $\mathcal{A}_i$ replies with $\mathcal{L}_f \subseteq \mathcal{L}_i$ (causal sub-net of $f$)
+                + if $f \notin P_i$ start **intervention-observation**
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              <!-- .slide: data-transition="slide" -->
+              ### Intervention-observation
+              ----
+
+              * if $f$ is controlled by $\mathcal{A}_j$
+                + $\mathcal{A}_j$ intervenes: $do(f = \bar{f})$
+                + $\mathcal{A}_i$ observes $\mathcal{P}(P_i)$
+              * otherwise
+                + $\mathcal{A}_i$ intervenes $\forall c \in \mathcal{C}_i$, while $\mathcal{A}_j$ observes $\mathcal{P}(P_j)$
+                + $\mathcal{A}_i$ sends observational data about $\mathcal{P}(U_i)$ to $\mathcal{A}_j$
+              * eventually, both agents refine $\mathcal{L}$ into $M$
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              <!-- .slide: data-transition="slide" -->
+              ### Coordination issues
+              ----
+
+              * Interventions must be done *one at a time, all other conditions being equal*, by definition
+                + calls for **distributed mutual exclusion**
+                + no ground truth $\implies$ no heuristic
+              * Interventions in real world (actuators) may *take time*
+                + calls for intervention-observation time window
+                + **negotiation** of duration and frequency
+
+              Exacerbated as $N \rightarrow \infty$ and comm. topology $\neq$ fully connected
+            </script>
+          </section>
+        </section>
+
+        <section data-transition="convex" data-background-image="" data-background-opacity=0.25 data-background-size="cover">
+          <section data-markdown>
+            <script type="text/template">
+              <!-- .slide: data-transition="slide" -->
+              ### Evaluation scenario
+              ----
+
+              <style>
+                .container{
+                  display: flex;
+                }
+                .col{
+                  flex: 1;
+                }
+              </style>
+              <div class="container">
+                <div class="col">
+                  <img data-src="res/fig60_1.png" height="75%">
+                </div>
+                <div class="col">
+                  <img data-src="res/icasa.png" width="55%" height="75%">
+                </div>
+              </div>
+              <ul>
+                <li> iCasa (simulated) smart home </li>
+                <li> 2 agents: "red" (girl, $\mathcal{A}_1$) and "blue" (boy, $\mathcal{A}_2$) </li>
+                <li> Actuators (circles) $\in \mathcal{C}$ and sensors (boxes) $\in U$ </li>
+              </ul>
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              <!-- .slide: data-transition="slide" -->
+              ## Performance metrics
+              ----
+
+              * **false positives** (FP): learnt edges not in ground truth (GT)
+              * **false negatives** (FN): edges in GT not learnt
+              * (extended) **Structural Hamming Distance** (SHD): FP + FN + unknowns (missing edges due to $v \notin P_i$)
+              * **time**: to learn $\mathcal{L}$ (baseline) or $M$ (multi-agent)
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              <!-- .slide: data-transition="slide" -->
+              ## Agent $\mathcal{A}_1$
+              ----
+
+              <style>
+                .container{
+                  display: flex;
+                }
+                .col{
+                  flex: 1;
+                }
+              </style>
+              <div class="container">
+                <div class="col">
+                  <img data-src="res/fig61_net_v2_shaded_1.png">
+                </div>
+                <div class="col">
+                  <img data-src="res/fig63_net_v2_shaded_1.png">
+                </div>
+              </div>
+              <ul>
+                <li> FP$_{\mathcal{L}_1}$ = FP$_{M_1}$ </li>
+                <li> FN$_{\mathcal{L}_1}$ = FN$_{M_1}$ </li>
+                <li> SHD$_{\mathcal{L}_1}$ > SHD$_{M_1} \implies M_1$ better </li>
+              </ul>
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              <!-- .slide: data-transition="slide" -->
+              ## Agent $\mathcal{A}_2$
+              ----
+
+              <style>
+                .container{
+                  display: flex;
+                }
+                .col{
+                  flex: 1;
+                }
+              </style>
+              <div class="container">
+                <div class="col">
+                  <img data-src="res/fig62_net_v2_shaded_1.png">
+                </div>
+                <div class="col">
+                  <img data-src="res/fig63bis_net_v2_shaded_1.png">
+                </div>
+              </div>
+              <ul>
+                <li> FP$_{\mathcal{L}_2}$ = FP$_{M_2}$ </li>
+                <li> FN$_{\mathcal{L}_2}$ > FN$_{M_2}$ </li>
+                <li> SHD$_{\mathcal{L}_2}$ >> SHD$_{M_2} \implies M_2$ better </li>
+              </ul>
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              <!-- .slide: data-transition="slide" -->
+              ## FP across GT complexity
+              ----
+
+              <style>
+                .container{
+                  display: flex;
+                }
+                .col{
+                  flex: 1;
+                }
+              </style>
+              <div class="container">
+                <div class="col">
+                  <img data-src="res/performance-false-positives-2.jpg">
+                </div>
+                <div class="col">
+                  Reasons?
+                  <ul>
+                    <li> no heuristic $\implies$ combinatorial explosion </li>
+                    <li> local algorithm (e.g. starts fully connected) </li>
+                  </ul>
+                </div>
+              </div>
+              <strong>Ongoing work</strong>: compare different algorithms, scale up
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              <!-- .slide: data-transition="slide" -->
+              ## Time across GT complexity
+              ----
+
+              <style>
+                .container{
+                  display: flex;
+                }
+                .col{
+                  flex: 1;
+                }
+              </style>
+              <div class="container">
+                <div class="col">
+                  <img data-src="res/performance-time-crop-2.jpg">
+                </div>
+                <div class="col">
+                  <ul>
+                    <li> computational complexity of (conditional) independence tests </li>
+                    <li> interventions are fast <strong>in simulated env</strong> </li>
+                  </ul>
+                </div>
+              </div>
+              <strong>Ongoing work</strong>: add delays to simulation, test in vitro
             </script>
           </section>
         </section>
