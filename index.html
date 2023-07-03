@@ -440,7 +440,16 @@
               </div>
             </script>
           </section>
-          <section data-markdown>
+          <section data-markdown data-auto-animate>
+            <script type="text/template">
+              <!-- .slide: data-transition="slide" -->
+              ## FP across GT complexity
+              ----
+
+              <img data-src="res/performance-false-positives-2.jpg">
+            </script>
+          </section>
+          <section data-markdown data-auto-animate>
             <script type="text/template">
               <!-- .slide: data-transition="slide" -->
               ## FP across GT complexity
@@ -461,15 +470,24 @@
                 <div class="col">
                   Reasons?
                   <ul>
-                    <li> no heuristic $\implies$ combinatorial explosion </li>
-                    <li> local algorithm (e.g. starts fully connected) </li>
+                    <li class="fragment" data-fragment-index="1"> no heuristic $\implies$ combinatorial explosion </li>
+                    <li class="fragment" data-fragment-index="2"> local algorithm (e.g. starts fully connected) </li>
                   </ul>
                 </div>
               </div>
-              <p class="fragment" style="color: darkgrey"> <em>(future work: compare different algorithms, scale up)</em> </p>
+              <p class="fragment" data-fragment-index="2" style="color: darkgrey"> <em>(future work: compare different algorithms, scale up)</em> </p>
             </script>
           </section>
-          <section data-markdown>
+          <section data-markdown data-auto-animate>
+            <script type="text/template">
+              <!-- .slide: data-transition="slide" -->
+              ## Time across GT complexity
+              ----
+
+              <img data-src="res/performance-time-crop-2.jpg">
+            </script>
+          </section>
+          <section data-markdown data-auto-animate="">
             <script type="text/template">
               <!-- .slide: data-transition="slide" -->
               ## Time across GT complexity
@@ -488,62 +506,30 @@
                   <img data-src="res/performance-time-crop-2.jpg">
                 </div>
                 <div class="col">
+                  Reasons?
                   <ul>
-                    <li> computational complexity of (conditional) independence tests </li>
-                    <li> interventions are fast <strong>in simulated env</strong> </li>
+                    <li class="fragment" data-fragment-index="1"> complexity of (conditional) independence tests </li>
+                    <li class="fragment" data-fragment-index="2"> interventions are fast <strong>in simulated env</strong> </li>
                   </ul>
                 </div>
               </div>
-              <p class="fragment" style="color: darkgrey"> <em>(future work: add delays to simulation, test in vitro)</em> </p>
+              <p class="fragment" data-fragment-index="2" style="color: darkgrey"> <em>(future work: add delays to simulation, test in vitro)</em> </p>
             </script>
           </section>
         </section>
 
+        <section data-markdown data-transition="convex" data-background-image="res/conclusion.jpg" data-background-opacity=0.25 data-background-size="cover">
+          <script type="text/template">
+            ## Conclusion
+            ----
 
-          <!--<section data-transition="slide" id="dt2mas-individual">
-            <h3> Individual perspective </h3>
-            <hr>
-            <style>
-              .container{
-                display: flex;
-              }
-              .col{
-                flex: 1;
-              }
-            </style>
-            <div class="container">
-              <div class="col">
-                <img data-src="res/dt2mas-generic.png">
-              </div>
-              <div class="col">
-                </br>
-                </br>
-                <img data-src="res/dt2mas-synergy.png">
-              </div>
-            </div>
-            <p> Agents <em>delegate</em> to DTs tasks requiring knowledge of the <em>local PA context</em> </p>
-            <p><small><a href="#/mas2dt-individual">$$\rightarrow$$</a></small></p>
-
-            <aside class="notes">
-              Applications are engineered around agents, that exploit DTs services.
-
-              The guiding principle based on local/global context is crucial to guide the designer in separating concerns and synergistic exploitation.
-            </aside>
-          </section>
-          <section data-transition="slide">
-            <ul>
-              <p><small> <strong>Web of Digital Twins</strong>: application-dependent <em>knowledge graphs</em>, dynamically established amongst DTs depending on CPS dynamics and application goals </small></p>
-              <img width="75%" height="75%" data-src="res/dt2mas-wodt.png">
-              <p style="color:grey"><small><em> Ricci, A., Croatti, A., Mariani, S., Montagna, S., Picone, M.: Web of digital twins.</br>ACM Trans. Internet Technol. (dec 2021). https://doi.org/10.1145/3507909</em></small></p>
-            </ul>
-
-            <aside class="notes">
-              Example of WoDT of a smart city and dynamic linking used for traffic control.
-
-              This is only the most natural engineering paradigm from MAS perspective, we don't argue it is the only one!
-            </aside>
-          </section>-->
-
+            1. first-step towards **multi-agent causal discovery**
+            2. <!-- .element: class="fragment" -->general collaboration protocol with pluggable local algorithm
+            3. <!-- .element: class="fragment" -->promising accuracy and performance results
+            4. <!-- .element: class="fragment" -->enabler for provably-correct decision-making beyond ML statistical models
+            5. &shy;<!-- .element: class="fragment" -->enabler for agents' learning-driven **adaptation**
+          </script>
+        </section>
 
         <section data-transition="convex" data-background-image="confused-meme.png" data-background-opacity=0.25 data-background-size="cover">
           <h3> Thanks </h3>
