@@ -50,10 +50,10 @@
           </p>
         </section>
 
-        <section data-transition="convex" data-background-image="" data-background-opacity=0.25 data-background-size="cover">
+        <section data-transition="convex">
           <section data-markdown>
             <script type="text/template">
-              <!-- .slide: data-background-image="res/motivations.jpg" data-background-opacity="0.25" data-background-size="cover" -->
+              <!-- .slide: data-background-image="res/motivations.jpg" data-background-opacity="0.15" data-background-size="contain" -->
               ## Motivation
               ----
 
@@ -68,7 +68,7 @@
           </section>
           <section data-markdown>
             <script type="text/template">
-              <!-- .slide: data-background-image="res/goals.jpg" data-background-opacity="0.15" data-background-size="cover" -->
+              <!-- .slide: data-transition="slide" data-background-image="res/goals.jpg" data-background-opacity="0.15" data-background-size="contain" -->
               ## Goal
               ----
 
@@ -84,7 +84,7 @@
           </section>
           <section data-markdown>
             <script type="text/template">
-              <!-- .slide: data-background-image="res/contribution.jpg" data-background-opacity="0.15" data-background-size="cover" -->
+              <!-- .slide: data-transition="slide" data-background-image="res/contribution.jpg" data-background-opacity="0.15" data-background-size="contain" -->
               ## Contribution
               ----
 
@@ -97,27 +97,27 @@
           </section>
         </section>
 
-        <section data-transition="convex" data-background-image="" data-background-opacity=0.25 data-background-size="cover">
+        <section data-transition="convex">
           <section data-markdown>
             <script type="text/template">
-              <!-- .slide: data-transition="slide" -->
+              <!-- .slide: data-background-image="res/intervention.jpg" data-background-opacity="0.15" data-background-size="contain" -->
               ## Intervention
               ----
               
               * ML recognises *correlation*, not causation
-              * Learning through **intervention**
+              * &shy;<!-- .element: class="fragment" -->Learning through **intervention**
                 + act on a variable *all others being untouched*
                 + observe changes
-                + formalised as do operator do(X=x)
+                + <!-- .element: class="fragment" -->formalised as do operator do(X=x)
                   - $\mathcal{P}(T) \neq \mathcal{P}(T | do(AC=on))$
                   - $\mathcal{P}(AC) = \mathcal{P}(AC | do(T=t))$
 
-              *What if cannot intervene (e.g. sensor variable)?*
+              &shy;<!-- .element: class="fragment" -->*What if cannot intervene (e.g. sensor variable)?*
             </script>
           </section>
           <section data-markdown>
             <script type="text/template">
-              <!-- .slide: data-transition="slide" -->
+              <!-- .slide: data-transition="slide" data-background-image="res/causal-discovery.jpg" data-background-opacity="0.15" data-background-size="cover" -->
               ### Causal discovery
               ----
 
@@ -125,13 +125,54 @@
                 + causal network is a DAG
                 + no unknown confounders
                 + (others, no time now)
-              * E.g. $AC \rightarrow T \leftarrow Season$
+              * &shy;<!-- .element: class="fragment" -->E.g. $AC \rightarrow T \leftarrow Season$
                 + *conditional independence* tests
                 + e.g. $\chi^2(T | Season)$ and viceversa
-              * Result is a causal network (DAG)
+
+              Result is a causal network (DAG) <!-- .element: class="fragment" -->
             </script>
           </section>
-          <section data-markdown>
+          <section data-markdown data-auto-animate>
+            <script type="text/template">
+              <!-- .slide: data-transition="slide" -->
+              ## Problem
+              ----
+
+              <img data-src="res/agent-env-4_1.png">
+            </script>
+          </section>
+          <section data-markdown data-auto-animate>
+            <script type="text/template">
+              <!-- .slide: data-transition="slide" -->
+              ## Problem
+              ----
+
+              <style>
+                .container{
+                  display: flex;
+                }
+                .col{
+                  flex: 1;
+                }
+              </style>
+              <div class="container">
+                <div class="col">
+                  <img data-src="res/agent-env-4_1.png">
+                </div>
+                <div class="col">
+                  <ul><small>
+                    <li> $N$ agents $\mathcal{A} = \{\mathcal{A}_i\}, i = 1, ..., N$ </li>
+                    <li class="fragment"> $V$ variables = $\mathcal{C} \cup U$ (controlled + uncontrolled) </li>
+                    <li class="fragment"> Each $\mathcal{A}_i$ learns <strong>local causal net</strong> $\mathcal{L}_i$ with observable vars $P_i = \{\mathcal{C}_i \cup U_i\} \subset V$ </li>
+                    <li class="fragment"> Each $\mathcal{A}_i$ has <strong>partial obs</strong>: $V = \bigcup_{i=1}^N P_i$ (overlaps may exist) </li>
+                    <li class="fragment"> Agents can communicate </li>
+                    <li class="fragment"> Agents have criteria to trigger collaboration </li>
+                  </small></ul>
+                </div>
+              </div>
+            </script>
+          </section>
+          <section data-markdown data-auto-animate>
             <script type="text/template">
               <!-- .slide: data-transition="slide" -->
               ## Problem
@@ -156,63 +197,72 @@
                     <li> Each $\mathcal{A}_i$ learns <strong>local causal net</strong> $\mathcal{L}_i$ with observable vars $P_i = \{\mathcal{C}_i \cup U_i\} \subset V$ </li>
                     <li> Each $\mathcal{A}_i$ has <strong>partial obs</strong>: $V = \bigcup_{i=1}^N P_i$ (overlaps may exist) </li>
                     <li> Agents can communicate </li>
-                    <li> Agents have criteria to trigger collaboration </li>
+                    <li> Agents have <em>criteria to trigger collaboration</em> </li>
                   </small></ul>
                 </div>
               </div>
-              Each $\mathcal{A}_i$ wants to learn $M_i$ refining $\mathcal{L}_i$ with unknown variables $\neg{P}_i = V \setminus P_i$ and their links with $P_i$
+              <p style="color: red"> Each $\mathcal{A}_i$ wants to learn $M_i$ refining $\mathcal{L}_i$ with unknown variables $\neg{P}_i = V \setminus P_i$ and their links with $P_i$ </p>
             </script>
           </section>
         </section>
 
-        <section data-transition="convex" data-background-image="" data-background-opacity=0.25 data-background-size="cover">
+        <section data-transition="convex">
           <section data-markdown>
             <script type="text/template">
               <!-- .slide: data-transition="slide" -->
               ### Main protocol
               ----
 
-              * whenever $\mathcal{A}_i$'s criteria trigger
-                + ask help by sending $\mathcal{A}_{j \neq i}$ its **frontier** variables $F_i$
-                  <small><ul>
+              In parallel, when $\mathcal{L}_i$ is learnt, agent $\mathcal{A}_i$ does:
+              * <!-- .element: class="fragment" data-fragment-index="1" -->check triggering criteria
+                + &shy;<!-- .element: class="fragment" -->ask help by sending $\mathcal{A}_{j \neq i}$ its **frontier** variables $F_i$
+                  <ul><small>
                     <li> e.g. $\mathcal{A}_i$ knows from $\mathcal{L}_i$ that $c \rightarrow e$ but acting on $c$ does not cause $e$ </li>
-                    <li> $e$ might have missing causes, put $e$ in $F_i$ </li>
-                  </ul></small>
-                + collect replies (see below) and refines $\mathcal{L}_i$ in $M_i$
-              * in parallel, reply to help requests
-                + if received $f \in F_{j \neq i}$ also $\in P_i$, $\mathcal{A}_i$ replies with $\mathcal{L}_f \subseteq \mathcal{L}_i$ (causal sub-net of $f$)
-                + if $f \notin P_i$ start **intervention-observation**
+                    <li> then $e$ might have missing causes, hence put $e$ in $F_i$ </li>
+                  </small></ul>
+                + &shy;<!-- .element: class="fragment" -->collect replies (see below) and refine $\mathcal{L}_i$ to $M_i$
+              * <!-- .element: class="fragment" data-fragment-index="1" -->reply to help requests
+                + &shy;<!-- .element: class="fragment" -->if received $f \in F_j$ also $\in P_i$, $\mathcal{A}_i$ replies with $\mathcal{L}_f \subseteq \mathcal{L}_i$ (causal sub-net of $f$)
+                + &shy;<!-- .element: class="fragment" -->else start **intervention-observation**
             </script>
           </section>
           <section data-markdown>
             <script type="text/template">
               <!-- .slide: data-transition="slide" -->
-              ### Intervention-observation
+              ## Intervention-observation
               ----
 
               * if $f$ is controlled by $\mathcal{A}_j$
-                + $\mathcal{A}_j$ intervenes: $do(f = \bar{f})$
-                + $\mathcal{A}_i$ observes $\mathcal{P}(P_i)$
-              * otherwise
+                + &shy;<!-- .element: class="fragment" data-fragment-index="1" -->$\mathcal{A}_j$ intervenes: $do(f = \bar{f})$
+                + &shy;<!-- .element: class="fragment" data-fragment-index="1" -->$\mathcal{A}_i$ observes $\mathcal{P}(P_i)$
+              * <!-- .element: class="fragment" -->otherwise
                 + $\mathcal{A}_i$ intervenes $\forall c \in \mathcal{C}_i$, while $\mathcal{A}_j$ observes $\mathcal{P}(P_j)$
                 + $\mathcal{A}_i$ sends observational data about $\mathcal{P}(U_i)$ to $\mathcal{A}_j$
-              * eventually, both agents refine $\mathcal{L}$ into $M$
+
+              <p class="fragment" style="color: green"> Eventually, both agents refine $\mathcal{L}$ into $M$ </p>
             </script>
           </section>
           <section data-markdown>
             <script type="text/template">
               <!-- .slide: data-transition="slide" -->
-              ### Coordination issues
+              <h3 style="color: red"> Coordination issues </h3>
+
               ----
 
               * Interventions must be done *one at a time, all other conditions being equal*, by definition
-                + calls for **distributed mutual exclusion**
-                + no ground truth $\implies$ no heuristic
-              * Interventions in real world (actuators) may *take time*
-                + calls for intervention-observation time window
-                + **negotiation** of duration and frequency
+                <ul><small>
+                  <li class="fragment" data-fragment-index="1"> calls for <strong>distributed mutual exclusion</strong> </li>
+                  <li class="fragment" data-fragment-index="1"> no ground truth $\implies$ no heuristic </li>
+                </small></ul>
+              * &shy;<!-- .element: class="fragment" -->Interventions in real world (actuators) may *take time*
+                <ul><small>
+                  <li class="fragment" data-fragment-index="2"> calls for intervention-observation time window </li>
+                  <li class="fragment" data-fragment-index="2"> <strong>negotiation</strong> of duration and frequency </li>
+                </small></ul>
 
-              Exacerbated as $N \rightarrow \infty$ and comm. topology $\neq$ fully connected
+              &shy;<!-- .element: class="fragment" -->Exacerbated as $N \rightarrow \infty$ <br> and comm. topology $\neq$ fully connected
+
+              <p class="fragment" style="color: darkgrey"> <em>(future work)</em> </p>
             </script>
           </section>
         </section>
