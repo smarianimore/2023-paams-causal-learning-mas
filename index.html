@@ -39,10 +39,9 @@
     <div class="reveal">
       <div class="slides">
 
-        <section data-transition="convex" data-background-image="" data-background-opacity=0.25 data-background-size="cover">
-          <p><small> PAAMS, 12-14/7/2023 </small></p>
-          <hr>
-          <h3> Multi-agent learning <br> of causal networks <br> in the Internet of Things </h3>
+        <section data-transition="convex" data-background-image="res/paams-home.png" data-background-opacity=0.15 data-background-size="cover">
+          <br>
+          <h2> Multi-agent learning <br> of causal networks <br> in the Internet of Things </h2>
           <hr>
           <p> <a href="https://smarianimore.github.io">Stefano Mariani</a>, Pasquale Roseti, Franco Zambonelli </p>
           <hr>
@@ -54,46 +53,46 @@
         <section data-transition="convex" data-background-image="" data-background-opacity=0.25 data-background-size="cover">
           <section data-markdown>
             <script type="text/template">
-              <!-- .slide: data-transition="slide" -->
+              <!-- .slide: data-background-image="res/motivations.jpg" data-background-opacity="0.25" data-background-size="cover" -->
               ## Motivation
               ----
 
-              * **Causal models** of app environment are required for correct inference, prediction, planning, what if, ...
-              * Software agents usually **implicitly embed** them...
+              * **Causal models** of app. environment are required for correct inference, prediction, planning, what-if, ...
+              * &shy;<!-- .element: class="fragment" -->Software agents usually **implicitly embed** them...
                 - e.g. IF cause THEN effect (reactive agents)
                 - belief :- intention(s) (BDI)
-              * ...assuming **complete knowledge** at **design-time**
+              * &shy;<!-- .element: class="fragment" -->...assuming **complete knowledge** at **design-time**
 
-              *What if that's not available?*
+              <p style="color: red" class="fragment"> <em>What if that's not available?</em> </p>
             </script>
           </section>
           <section data-markdown>
             <script type="text/template">
-              <!-- .slide: data-transition="slide" -->
+              <!-- .slide: data-background-image="res/goals.jpg" data-background-opacity="0.15" data-background-size="cover" -->
               ## Goal
               ----
 
               **Learn** causal models at **run-time**!
 
-              * **Causal discovery** tells apart cause-effect from correlation...
-              * ...but mostly assumes full observability of env
+              * &shy;<!-- .element: class="fragment" -->**Causal discovery** tells apart cause-effect from correlation...
+              * <!-- .element: class="fragment" -->...but mostly assumes full observability of env
 
-              *What if that's not available?*
+              <p style="color: red" class="fragment"> <em>What if that's not available?</em> </p>
 
-              Learn with **multiple agents** with **partial obs**!
+              <p style="color: green" class="fragment"> Learn with <strong>multiple agents</strong> with <strong>partial obs</strong>! </p>
             </script>
           </section>
           <section data-markdown>
             <script type="text/template">
-              <!-- .slide: data-transition="slide" -->
+              <!-- .slide: data-background-image="res/contribution.jpg" data-background-opacity="0.15" data-background-size="cover" -->
               ## Contribution
               ----
 
               **Collaborative multi-agent protocol for distributed causal discovery**
 
-              1. formulate multi-agent learning problem
-              2. introduce coordination protocol
-              3. experimental evaluation
+              1. <!-- .element: class="fragment" -->formulate multi-agent learning problem
+              2. <!-- .element: class="fragment" -->introduce coordination protocol
+              3. <!-- .element: class="fragment" -->experimental evaluation
             </script>
           </section>
         </section>
@@ -104,7 +103,7 @@
               <!-- .slide: data-transition="slide" -->
               ## Intervention
               ----
-
+              
               * ML recognises *correlation*, not causation
               * Learning through **intervention**
                 + act on a variable *all others being untouched*
@@ -449,6 +448,7 @@
       Reveal.initialize({
         hash: true,
         progress: true,
+        slideNumber: true,
         //autoSlide: 3000,
         pdfSeparateFragments: false,
         // Learn about plugins: https://revealjs.com/plugins/
