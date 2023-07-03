@@ -209,7 +209,7 @@
         <section data-transition="convex">
           <section data-markdown>
             <script type="text/template">
-              <!-- .slide: data-transition="slide" -->
+              <!-- .slide: data-transition="slide" data-background-image="res/protocol_1.png" data-background-opacity="0.15" data-background-size="80%" -->
               ### Main protocol
               ----
 
@@ -228,7 +228,7 @@
           </section>
           <section data-markdown>
             <script type="text/template">
-              <!-- .slide: data-transition="slide" -->
+              <!-- .slide: data-transition="slide" data-background-image="res/intervention_1.png" data-background-opacity="0.15" data-background-size="75%" -->
               ## Intervention-observation
               ----
 
@@ -244,7 +244,7 @@
           </section>
           <section data-markdown>
             <script type="text/template">
-              <!-- .slide: data-transition="slide" -->
+              <!-- .slide: data-transition="slide" data-background-image="res/coordination-issues.jpg" data-background-opacity="0.15" data-background-size="70%" -->
               <h3 style="color: red"> Coordination issues </h3>
 
               ----
@@ -267,8 +267,41 @@
           </section>
         </section>
 
-        <section data-transition="convex" data-background-image="" data-background-opacity=0.25 data-background-size="cover">
-          <section data-markdown>
+        <section data-transition="convex">
+          <section data-markdown data-auto-animate>
+            <script type="text/template">
+              <!-- .slide: data-transition="slide" -->
+              ### Evaluation scenario
+              ----
+
+              <img data-src="res/icasa.png" width="55%" height="75%">
+            </script>
+          </section>
+          <section data-markdown data-auto-animate>
+            <script type="text/template">
+              <!-- .slide: data-transition="slide" -->
+              ### Evaluation scenario
+              ----
+
+              <style>
+                .container{
+                  display: flex;
+                }
+                .col{
+                  flex: 1;
+                }
+              </style>
+              <div class="container">
+                <div class="col">
+                  <img data-src="res/fig60_1.png" height="75%">
+                </div>
+                <div class="col">
+                  <img data-src="res/icasa.png" width="55%" height="75%">
+                </div>
+              </div>
+            </script>
+          </section>
+          <section data-markdown data-auto-animate>
             <script type="text/template">
               <!-- .slide: data-transition="slide" -->
               ### Evaluation scenario
@@ -299,7 +332,7 @@
           </section>
           <section data-markdown>
             <script type="text/template">
-              <!-- .slide: data-transition="slide" -->
+              <!-- .slide: data-transition="slide" data-background-image="res/metrics.jpg" data-background-opacity="0.15" data-background-size="contain" -->
               ## Performance metrics
               ----
 
@@ -309,7 +342,19 @@
               * **time**: to learn $\mathcal{L}$ (baseline) or $M$ (multi-agent)
             </script>
           </section>
-          <section data-markdown>
+          <section data-markdown data-auto-animate>
+            <script type="text/template">
+              <!-- .slide: data-transition="slide" -->
+              ## Agent $\mathcal{A}_1$
+              ----
+
+              <div class="r-stack">
+                <img data-src="res/fig61_net_v2_shaded_1.png" height="75%">
+                <img class="fragment" data-src="res/fig63_net_v2_shaded_1.png" height="75%">
+              </div>
+            </script>
+          </section>
+          <section data-markdown data-auto-animate>
             <script type="text/template">
               <!-- .slide: data-transition="slide" -->
               ## Agent $\mathcal{A}_1$
@@ -331,14 +376,34 @@
                   <img data-src="res/fig63_net_v2_shaded_1.png">
                 </div>
               </div>
-              <ul>
-                <li> FP$_{\mathcal{L}_1}$ = FP$_{M_1}$ </li>
-                <li> FN$_{\mathcal{L}_1}$ = FN$_{M_1}$ </li>
-                <li> SHD$_{\mathcal{L}_1}$ > SHD$_{M_1} \implies M_1$ better </li>
-              </ul>
+              <div class="container">
+                <div class="col">
+                  <ul>
+                    <li> FP$_{\mathcal{L}_1}$ = FP$_{M_1}$ </li>
+                    <li> FN$_{\mathcal{L}_1}$ = FN$_{M_1}$ </li>
+                  </ul>
+                </div>
+                <div class="col">
+                  <ul>
+                    <li> SHD$_{\mathcal{L}_1}$ > SHD$_{M_1}$ <br> $\implies M_1$ better </li>
+                  </ul>
+                </div>
+              </div>
             </script>
           </section>
-          <section data-markdown>
+          <section data-markdown data-auto-animate>
+            <script type="text/template">
+              <!-- .slide: data-transition="slide" -->
+              ## Agent $\mathcal{A}_2$
+              ----
+
+              <div class="r-stack">
+                <img data-src="res/fig62_net_v2_shaded_1.png" height="75%">
+                <img class="fragment" data-src="res/fig63bis_net_v2_shaded_1.png" height="75%">
+              </div>
+            </script>
+          </section>
+          <section data-markdown data-auto-animate>
             <script type="text/template">
               <!-- .slide: data-transition="slide" -->
               ## Agent $\mathcal{A}_2$
@@ -360,11 +425,19 @@
                   <img data-src="res/fig63bis_net_v2_shaded_1.png">
                 </div>
               </div>
-              <ul>
-                <li> FP$_{\mathcal{L}_2}$ = FP$_{M_2}$ </li>
-                <li> FN$_{\mathcal{L}_2}$ > FN$_{M_2}$ </li>
-                <li> SHD$_{\mathcal{L}_2}$ >> SHD$_{M_2} \implies M_2$ better </li>
-              </ul>
+              <div class="container">
+                <div class="col">
+                  <ul>
+                    <li> FP$_{\mathcal{L}_2}$ = FP$_{M_2}$ </li>
+                    <li> FN$_{\mathcal{L}_2}$ > FN$_{M_2}$ </li>
+                  </ul>
+                </div>
+                <div class="col">
+                  <ul>
+                    <li> SHD$_{\mathcal{L}_2}$ >> SHD$_{M_2}$ <br> $\implies M_2$ better </li>
+                  </ul>
+                </div>
+              </div>
             </script>
           </section>
           <section data-markdown>
@@ -393,7 +466,7 @@
                   </ul>
                 </div>
               </div>
-              <strong>Ongoing work</strong>: compare different algorithms, scale up
+              <p class="fragment" style="color: darkgrey"> <em>(future work: compare different algorithms, scale up)</em> </p>
             </script>
           </section>
           <section data-markdown>
@@ -421,7 +494,7 @@
                   </ul>
                 </div>
               </div>
-              <strong>Ongoing work</strong>: add delays to simulation, test in vitro
+              <p class="fragment" style="color: darkgrey"> <em>(future work: add delays to simulation, test in vitro)</em> </p>
             </script>
           </section>
         </section>
